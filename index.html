@@ -1,59 +1,100 @@
-<!-- PANTALLA 1: BUSCADOR PRINCIPAL -->
-<div id="step-search" class="w-full max-w-xl text-center fade-in">
-    <h1 class="text-4xl font-light mb-12 italic text-gray-900 tracking-tighter">Proporciones.com</h1>
-    <div class="relative">
-        <input type="text" id="main-search" 
-               placeholder="¿Qué proporción necesitas hoy?" 
-               class="w-full p-6 text-xl bg-white border border-gray-200 rounded-[2rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-gray-300">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proporciones.com | El estándar de las medidas</title>
+    
+    <!-- Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts para tipografía premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #fcfcfc; 
+            -webkit-font-smoothing: antialiased;
+        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        <!-- Sugerencias (Se llenan vía script.js) -->
-        <div id="suggestions" class="absolute w-full mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden overflow-hidden z-50">
-        </div>
-    </div>
-    <p class="mt-6 text-gray-400 text-sm font-light">Escribe "Arroz", "Asado" o "Cemento"...</p>
-</div>
+        .hidden { display: none; }
+        
+        /* Estética de los Sliders */
+        input[type="range"] { accent-color: #000; }
+        .slider-label { font-size: 0.75rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        /* Badge de unidades interactivo */
+        .unit-badge { 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            border-bottom: 1px dashed #4b5563;
+        }
+        .unit-badge:hover { color: #ffffff; border-bottom-color: #ffffff; scale: 1.05; }
+    </style>
+</head>
+<body class="text-black flex flex-col items-center justify-center min-h-screen p-6">
 
-<!-- PANTALLA 2: CONFIGURACIÓN (DINÁMICA) -->
-<div id="step-config" class="w-full max-w-md hidden fade-in">
-    <button onclick="goBack('search')" class="text-gray-400 mb-8 hover:text-black transition-colors text-sm flex items-center gap-2">
-        <span>←</span> Volver a buscar
-    </button>
-    
-    <h2 id="config-title" class="text-2xl font-semibold mb-8 text-left text-gray-800 tracking-tight">--</h2>
-    
-    <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-50">
-        <!-- Contenedor donde script.js inyectará los sliders del JSON -->
-        <div id="config-container" class="space-y-10 mb-10">
+    <!-- PANTALLA 1: BUSCADOR PRINCIPAL -->
+    <div id="step-search" class="w-full max-w-xl text-center fade-in">
+        <h1 class="text-4xl font-light mb-12 italic text-gray-900 tracking-tighter">Proporciones.com</h1>
+        <div class="relative">
+            <input type="text" id="main-search" 
+                   placeholder="¿Qué proporción necesitas hoy?" 
+                   class="w-full p-6 text-xl bg-white border border-gray-200 rounded-[2rem] shadow-sm focus:outline-none focus:ring-2 focus:ring-black transition-all placeholder:text-gray-300">
+            
+            <!-- Sugerencias (Se llenan vía script.js) -->
+            <div id="suggestions" class="absolute w-full mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 hidden overflow-hidden z-50">
+            </div>
         </div>
-        
-        <button onclick="calculate()" class="w-full bg-black text-white py-5 rounded-2xl font-medium hover:bg-zinc-800 transition-all shadow-xl active:scale-95">
-            Calcular proporciones
+        <p class="mt-6 text-gray-400 text-sm font-light">Escribe "Arroz", "Asado" o "Cemento"...</p>
+    </div>
+
+    <!-- PANTALLA 2: CONFIGURACIÓN (DINÁMICA) -->
+    <div id="step-config" class="w-full max-w-md hidden fade-in">
+        <button onclick="goBack('search')" class="text-gray-400 mb-8 hover:text-black transition-colors text-sm flex items-center gap-2">
+            <span>←</span> Volver a buscar
         </button>
-    </div>
-</div>
-
-<!-- PANTALLA 3: RESULTADOS FINALES -->
-<div id="step-results" class="w-full max-w-md hidden fade-in">
-    <button onclick="goBack('config')" class="text-gray-400 mb-8 hover:text-black transition-colors text-sm flex items-center gap-2">
-        <span>←</span> Ajustar medidas
-    </button>
-    
-    <div class="bg-zinc-950 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
-        <!-- Decoración sutil -->
-        <div class="absolute top-0 right-0 w-32 h-32 bg-zinc-900 rounded-full -mr-16 -mt-16 opacity-50"></div>
         
-        <h2 class="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mb-12 border-b border-zinc-900 pb-6 font-bold">Proporciones Finales</h2>
+        <h2 id="config-title" class="text-2xl font-semibold mb-8 text-left text-gray-800 tracking-tight">--</h2>
         
-        <!-- Contenedor donde script.js inyectará los resultados -->
-        <div id="results-list" class="space-y-10">
-        </div>
-
-        <div class="mt-14 pt-8 border-t border-zinc-900 text-center">
-            <button onclick="location.reload()" class="text-zinc-500 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-all">Nueva consulta</button>
+        <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-50">
+            <!-- Contenedor donde script.js inyectará los sliders del JSON -->
+            <div id="config-container" class="space-y-10 mb-10">
+            </div>
+            
+            <button onclick="calculate()" class="w-full bg-black text-white py-5 rounded-2xl font-medium hover:bg-zinc-800 transition-all shadow-xl active:scale-95">
+                Calcular proporciones
+            </button>
         </div>
     </div>
-</div>
 
-<!-- LLAMADA AL SCRIPT (EL CEREBRO) -->
-<!-- Se coloca al final para asegurar que el HTML ya exista cuando el JS intente tocarlo -->
-<script src="script.js"></script>
+    <!-- PANTALLA 3: RESULTADOS FINALES -->
+    <div id="step-results" class="w-full max-w-md hidden fade-in">
+        <button onclick="goBack('config')" class="text-gray-400 mb-8 hover:text-black transition-colors text-sm flex items-center gap-2">
+            <span>←</span> Ajustar medidas
+        </button>
+        
+        <div class="bg-zinc-950 text-white p-10 rounded-[3rem] shadow-2xl relative overflow-hidden">
+            <!-- Decoración sutil -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-zinc-900 rounded-full -mr-16 -mt-16 opacity-50"></div>
+            
+            <h2 class="text-zinc-500 text-[10px] uppercase tracking-[0.3em] mb-12 border-b border-zinc-900 pb-6 font-bold">Proporciones Finales</h2>
+            
+            <!-- Contenedor donde script.js inyectará los resultados -->
+            <div id="results-list" class="space-y-10">
+            </div>
+
+            <div class="mt-14 pt-8 border-t border-zinc-900 text-center">
+                <button onclick="location.reload()" class="text-zinc-500 hover:text-white text-[10px] tracking-widest uppercase font-bold transition-all">Nueva consulta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LLAMADA AL SCRIPT (EL CEREBRO) -->
+    <!-- Se coloca al final para asegurar que el HTML ya exista cuando el JS intente tocarlo -->
+    <script src="script.js"></script>
+
+</body>
+</html>
