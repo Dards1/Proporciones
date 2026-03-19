@@ -8,12 +8,12 @@
           "label": "Arroz Blanco",
           "sliders": [
             {"id": "personas", "label": "Personas", "min": 1, "max": 10, "step": 1, "default": 2},
-            {"id": "sabor", "label": "Sabor", "min": 1, "max": 3, "labels": ["Neutro", "Sabroso"], "default": 2},
-            {"id": "textura", "label": "Textura", "min": 1, "max": 3, "labels": ["Al dente", "Suave"], "default": 2}
+            {"id": "sabor", "label": "Sal", "min": 1, "max": 3, "labels": ["Poca", "Mucha"], "default": 2},
+            {"id": "textura", "label": "Textura", "min": 1, "max": 3, "labels": ["Seco", "Caldoso"], "default": 1}
           ],
           "resultados": [
-            {"id": "principal", "label": "Arroz", "unidades": ["g", "lb", "tazas", "ccm", "g harina"]},
-            {"id": "liquido", "label": "Agua", "unidades": ["ml", "tazas"]},
+            {"id": "principal", "label": "Arroz", "unidades": ["g", "tazas", "lb"]},
+            {"id": "liquido", "label": "Agua", "unidades": ["ml", "tazas", "l"]},
             {"id": "condimento", "label": "Sal", "unidades": ["g", "cdta"]}
           ]
         },
@@ -21,9 +21,9 @@
           "id": "asado",
           "label": "Asado (Carne)",
           "sliders": [
-            {"id": "personas", "label": "Personas", "min": 1, "max": 50, "step": 1, "default": 4},
-            {"id": "ninos", "label": "% Niños", "min": 0, "max": 100, "step": 10, "default": 20},
-            {"id": "duracion", "label": "Duración (hs)", "min": 1, "max": 6, "step": 1, "default": 3}
+            {"id": "personas", "label": "Adultos", "min": 1, "max": 50, "step": 1, "default": 4},
+            {"id": "ninos", "label": "Niños", "min": 0, "max": 20, "step": 1, "default": 2},
+            {"id": "hambre", "label": "Apetito", "min": 1, "max": 3, "labels": ["Poco", "Mucho"], "default": 2}
           ],
           "resultados": [
             {"id": "carne", "label": "Carne Total", "unidades": ["kg", "lb"]},
@@ -32,14 +32,13 @@
         },
         {
           "id": "cafe",
-          "label": "Café (Prensa/Goteo)",
+          "label": "Café",
           "sliders": [
             {"id": "tazas", "label": "Tazas", "min": 1, "max": 8, "step": 1, "default": 2},
-            {"id": "intensidad", "label": "Intensidad", "min": 1, "max": 3, "labels": ["Suave", "Fuerte"], "default": 2},
-            {"id": "molido", "label": "Tipo de Molido", "min": 1, "max": 3, "labels": ["Fino", "Grueso"], "default": 2}
+            {"id": "intensidad", "label": "Intensidad", "min": 1, "max": 3, "labels": ["Suave", "Fuerte"], "default": 2}
           ],
           "resultados": [
-            {"id": "cafe_granos", "label": "Café", "unidades": ["g", "cucharadas"]},
+            {"id": "cafe_granos", "label": "Café Molido", "unidades": ["g", "cucharadas"]},
             {"id": "agua_cafe", "label": "Agua", "unidades": ["ml", "tazas"]}
           ]
         }
@@ -53,25 +52,11 @@
           "label": "Desinfectante (Cloro)",
           "sliders": [
             {"id": "agua_total", "label": "Litros de Agua", "min": 1, "max": 20, "step": 1, "default": 5},
-            {"id": "uso", "label": "Uso", "min": 1, "max": 3, "labels": ["Pisos", "Baños/Profundo"], "default": 1},
-            {"id": "concentracion", "label": "Concentración deseada", "min": 1, "max": 3, "labels": ["Baja", "Alta"], "default": 2}
+            {"id": "uso", "label": "Suciedad", "min": 1, "max": 3, "labels": ["Leve", "Profunda"], "default": 1}
           ],
           "resultados": [
-            {"id": "cloro_puro", "label": "Cloro", "unidades": ["ml", "tapas"]},
-            {"id": "agua_base", "label": "Agua", "unidades": ["L", "baldes"]}
-          ]
-        },
-        {
-          "id": "mascotas",
-          "label": "Alimento Mascotas",
-          "sliders": [
-            {"id": "peso", "label": "Peso Mascota (kg)", "min": 1, "max": 60, "step": 1, "default": 10},
-            {"id": "actividad", "label": "Actividad Física", "min": 1, "max": 3, "labels": ["Baja", "Alta"], "default": 2},
-            {"id": "edad", "label": "Edad", "min": 1, "max": 3, "labels": ["Cachorro", "Senior"], "default": 2}
-          ],
-          "resultados": [
-            {"id": "porcion", "label": "Ración Diaria", "unidades": ["g", "tazas"]},
-            {"id": "hidratacion", "label": "Agua sugerida", "unidades": ["ml", "tazas"]}
+            {"id": "cloro_puro", "label": "Cloro Puro", "unidades": ["ml", "tapas", "tazas"]},
+            {"id": "agua_base", "label": "Agua", "unidades": ["l", "ml"]}
           ]
         }
       ]
@@ -83,9 +68,8 @@
           "id": "cemento",
           "label": "Mezcla Cemento",
           "sliders": [
-            {"id": "volumen", "label": "Volumen Total (L)", "min": 10, "max": 500, "step": 10, "default": 50},
-            {"id": "resistencia", "label": "Resistencia", "min": 1, "max": 3, "labels": ["Baja", "Estructural"], "default": 2},
-            {"id": "uso_constr", "label": "Tipo de Obra", "min": 1, "max": 2, "labels": ["Contrapiso", "Viga"], "default": 1}
+            {"id": "volumen", "label": "Volumen (Litros)", "min": 10, "max": 500, "step": 10, "default": 50},
+            {"id": "uso_constr", "label": "Tipo de Obra", "min": 1, "max": 2, "labels": ["Contrapiso", "Viga/Columna"], "default": 1}
           ],
           "resultados": [
             {"id": "bolsas_cem", "label": "Cemento", "unidades": ["kg", "bolsas"]},
